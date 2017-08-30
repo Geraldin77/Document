@@ -381,12 +381,180 @@ t.test( as.numeric(as.character(data$Fråga..10[id_f])), as.numeric(as.character
 #2: In t.test.default(as.numeric(as.character(data$Fråga..10[id_f])),  :
 #  NAs durch Umwandlung erzeugt
 
+
 plot( as.numeric(as.character(data$Fråga..9)) ~ data$tidigare_provatgning, 
 	ylab="Fråga 9",xlab="tidigare provtagning")
 
 plot( as.numeric(as.character(data$Fråga..10)) ~ data$tidigare_provatgning, 
 	ylab="Fråga 10",xlab="tidigare provtagning")
 
+##2017_08_30
+
+cor.test( as.numeric(as.character(data$Fråga.7)) , as.numeric(as.character(data$Fråga..9)))
+
+
+#	Pearson's product-moment correlation
+
+#data:  as.numeric(as.character(data$Fråga.7)) and as.numeric(as.character(data$Fråga..9))
+#t = -0.53347, df = 153, p-value = 0.5945
+#alternative hypothesis: true correlation is not equal to 0
+#95 percent confidence interval:
+# -0.1993821  0.1153435
+#sample estimates:
+#        cor 
+#-0.04308823 
+
+cor.test( as.numeric(as.character(data$Fråga.7)) , as.numeric(as.character(data$Fråga..10)))
+
+#	Pearson's product-moment correlation
+
+#data:  as.numeric(as.character(data$Fråga.7)) and as.numeric(as.character(data$Fråga..10))
+#t = -0.3933, df = 93, p-value = 0.695
+#alternative hypothesis: true correlation is not equal to 0
+#95 percent confidence interval:
+# -0.2403184  0.1621254
+#sample estimates:
+#        cor 
+#-0.04074907 
+
+
+cor.test( as.numeric(as.character(data$Fråga.6)) , as.numeric(as.character(data$Fråga..10)))
+
+#	Pearson's product-moment correlation
+
+#data:  as.numeric(as.character(data$Fråga.6)) and as.numeric(as.character(data$Fråga..10))
+#t = 7.5671, df = 93, p-value = 2.692e-11
+#alternative hypothesis: true correlation is not equal to 0
+#95 percent confidence interval:
+# 0.4748496 0.7282514
+#sample estimates:
+#     cor 
+#0.617314 
+
+
+cor.test( as.numeric(as.character(data$Fråga..9)) , as.numeric(as.character(data$Fråga..10)))
+
+#	Pearson's product-moment correlation
+
+#data:  as.numeric(as.character(data$Fråga..9)) and as.numeric(as.character(data$Fråga..10))
+#t = 11.998, df = 93, p-value < 2.2e-16
+#alternative hypothesis: true correlation is not equal to 0
+#95 percent confidence interval:
+# 0.6855800 0.8477917
+#sample estimates:
+#      cor 
+#0.7794266 
+
+plot( jitter(as.numeric(as.character(data$Fråga..9))) , jitter(as.numeric(as.character(data$Fråga..10))))
+
+#And now the pupulation analysis...
+
+summary(data)
+
+#    Enkätnr        Åldern   kön     Antal.barn.i.familjen Mama.papa.närstående
+# Min.   :  1.0   0-3  :60   f :87   1 :20                 m :103              
+# 1st Qu.: 39.5   4-6  :32   na:13   2 :47                 mp:  4              
+# Median : 78.0   7-9  :21   p :55   3 :17                 n :  5              
+# Mean   : 78.0   10-13:26           4 : 1                 na:  4              
+# 3rd Qu.:116.5   14-17:16           5 : 1                 p : 39              
+# Max.   :155.0                      na:69                                     
+                                                                              
+# Förkylning Halsont Feber  morgontemperatur Ont.i.öron UVI     Hosta 
+# 0:90       0:98    0:74   Min.   :37.30    0:140      0:150   0:96  
+# 1:65       1:57    1:81   1st Qu.:38.20    1: 15      1:  5   1:59  
+#                           Median :39.00                             
+#                           Mean   :38.82                             
+#                           3rd Qu.:39.50                             
+#                           Max.   :40.80                             
+#                           NA's   :102                               
+# Kräkningar Diarre  Magont  Fråga.2a..J.N Fråga.2b.J.N
+# 0:153      0:150   0:133   j:132         j :89       
+# 1:  2      1:  5   1: 22   n: 23         n :56       
+#                                          na:10       
+                                                      
+                                                      
+                                                      
+                                                      
+# Fråga.3...1.schlechter..0.unverändert...1.besser. Fråga.4a.N.J Fråga.4a..Antal
+# 0 :77                                             j :117       na     :105    
+# 1 :24                                             n : 25       3      : 12    
+# -1:53                                             na: 13       2      : 10    
+# na: 1                                                          1      :  8    
+#                                                                5      :  8    
+#                                                                10     :  4    
+#                                                                (Other):  8    
+# Fråga.4bN.J   X4b.Antal      Fråga.5      Fråga.6      Fråga.7      
+# j :97       na     :113   0      :31   0      :29   Min.   : 0.000  
+# n :30       1      : 17   na     :18   5      :22   1st Qu.: 0.000  
+# na:28       2      :  9   1      :16   1      :19   Median : 1.000  
+#             3      :  6   5      :16   3      :19   Mean   : 2.206  
+#             4      :  3   2      :14   4      :15   3rd Qu.: 3.000  
+#             5      :  3   3      :14   2      :13   Max.   :10.000  
+#             (Other):  4   (Other):46   (Other):38                   
+#    Fråga..8         Fråga..9      Fråga..10.VAS.CRP Fråga..10.VAS.strep
+# Min.   : 0.000   Min.   : 0.000   x      :52        na     :113        
+# 1st Qu.: 0.000   1st Qu.: 0.000   na     :36        x      : 11        
+# Median : 1.000   Median : 2.000   0      :21        0      : 10        
+# Mean   : 2.219   Mean   : 3.045   2      :18        2      :  5        
+# 3rd Qu.: 4.000   3rd Qu.: 5.000   4      :12        4      :  5        
+# Max.   :10.000   Max.   :10.000   5      : 5        6      :  5        
+#                                   (Other):11        (Other):  6        
+#    CRP            STREP           Fråga..10  tidigare_provatgning
+# Mode :logical   Mode :logical   x      :60   no : 22             
+# FALSE:36        FALSE:113       0      :30   yes:133             
+# TRUE :119       TRUE :42        2      :22                       
+# NA's :0         NA's :0         4      :16                       
+#                                 6      : 9                       
+#                                 5      : 7                       
+#                                 (Other):11                       
+# tidigare_provatgning_binary
+# Mode :logical              
+# FALSE:22                   
+# TRUE :133                  
+# NA's :0       
+
+## drop the double tested childreen:
+data2 <- data[-which(data$STREP & data$CRP),]
+cor.test( as.numeric(as.character(data2$Fråga..9)) , as.numeric(as.character(data2$Fråga..10)))
+
+#	Pearson's product-moment correlation
+
+#data:  as.numeric(as.character(data2$Fråga..9)) and as.numeric(as.character(data2$Fråga..10))
+#t = 12.254, df = 90, p-value < 2.2e-16
+#alternative hypothesis: true correlation is not equal to 0
+#95 percent confidence interval:
+# 0.6991314 0.8567807
+#sample estimates:
+#     cor 
+#0.790722 
+
+#Warnmeldung:
+#In cor.test.default(as.numeric(as.character(data2$Fråga..9)), as.numeric(as.character(data2$Fråga..10))) :
+#  NAs durch Umwandlung erzeugt
+
+# If anything the data gets better - so we do not really care aboput that.
+
+
+round(table(data$Åldern) / sum(table(data$Åldern)) * 100 ,1)
+#  0-3   4-6   7-9 10-13 14-17 
+# 38.7  20.6  13.5  16.8  10.3 
+
+pdf( file="Age_pie.pdf", width=6, height=6)
+pie(x=table(data$Åldern), clockwise=T, col=rainbow(5))
+dev.off()
+
+table(data$Fråga.2a..J.N) / 155 * 100
+#       j        n 
+#85.16129 14.83871
+
+apply( data[,c('Kräkningar','Diarre','Magont')],1, function (x) sum(as.numeric(as.character(x))))
+
+data$illnes = ''
+
+for (n in colnames(data)[c(6,7,8,10,11,12,13,14,15)]){
+	ids = which(data[,n] == 1)
+	data$illnes[ids] = paste( data$illnes[ids], n)
+}
 
 
 
