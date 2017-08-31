@@ -557,4 +557,72 @@ for (n in colnames(data)[c(6,7,8,10,11,12,13,14,15)]){
 }
 
 
+## day 2017-08-31
+## kids in the family - any influence on pain?
+only_1 <- which(as.numeric(as.character(data$Antal.barn.i.familjen)) == 1 )
+more_than_1 <- which(as.numeric(as.character(data$Antal.barn.i.familjen)) > 1 )
+
+boxplot( as.numeric(as.character(data$Fråga..9))[only_1], as.numeric(as.character(data$Fråga..9))[more_than_1])
+
+ t.test( as.numeric(as.character(data$Fråga..9))[only_1], as.numeric(as.character(data$Fråga..9))[more_than_1])
+
+#	Welch Two Sample t-test
+
+#data:  as.numeric(as.character(data$Fråga..9))[only_1] and as.numeric(as.character(data$Fråga..9))#[more_than_1]
+#t = 1.2734, df = 29.317, p-value = 0.2129
+#alternative hypothesis: true difference in means is not equal to 0
+#95 percent confidence interval:
+# -0.598901  2.577689
+#sample estimates:
+#mean of x mean of y 
+# 3.550000  2.560606 
+
+
+boxplot( as.numeric(as.character(data$Fråga..10))[only_1], as.numeric(as.character(data$Fråga..10))[more_than_1])
+
+t.test( as.numeric(as.character(data$Fråga..10))[only_1], as.numeric(as.character(data$Fråga..10))[more_than_1])
+
+#	Welch Two Sample t-test
+
+#data:  as.numeric(as.character(data$Fråga..10))[only_1] and as.numeric(as.character(data#$Fråga..10))[more_than_1]
+#t = 0.2117, df = 11.975, p-value = 0.8359
+#alternative hypothesis: true difference in means is not equal to 0
+#95 percent confidence interval:
+# -1.897599  2.305932
+#sample estimates:
+#mean of x mean of y 
+# 2.600000  2.395833 
+
+
+mean_cor_test <- function (colA, colB,  method="pearson" ) {
+	d <- vector('numeric', 1000)
+	r <- vector('numeric', 1000)
+	for ( i in 1:1000 ) {
+		t  <- cor.test( 
+			jitter(as.numeric(as.character(data[, colA]))), 
+			jitter(as.numeric(as.character(data[, colB]))),
+			method=method
+		)
+		d[i] <- t$p.value
+		r[i] <- t$estimate
+	}
+	list( mean.p.value =mean (d), mean.estimate=mean(r))
+}
+
+mean_cor_test( 'Fråga..8', 'Fråga..10')
+#$mean.p.value
+#[1] 1.435407e-12
+
+#$mean.estimate
+#[1] 0.6477754
+
+#Es gab 50 oder mehr Warnungen (Anzeige der ersten 50 mit warnings())
+mean_cor_test( 'Fråga..8', 'Fråga..9')
+#$mean.p.value
+#[1] 1.582381e-12
+#
+#$mean.estimate
+#[1] 0.5292124
+
+
 
