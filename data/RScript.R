@@ -285,7 +285,7 @@ data$STREP = is.na(as.numeric(as.character(data[,29])))==F
 data$STREP[which(data[,29] =='x')] = TRUE
 
 
-mean_sd_age <- function( column, age, crp=T ) {
+mean_sd_age <- function(  column, age, crp=T ) {
 	if ( crp ) {
 		ids <- which(data[,'Åldern'] == age & data[,'CRP'] )
 	}else{
@@ -296,6 +296,29 @@ mean_sd_age <- function( column, age, crp=T ) {
 	s = sd ( as.numeric(as.character( data[ids,column] )))
 	c (m , s)
 }
+
+median_mad_age <- function( column, age, crp=T ) {
+	if ( crp ) {
+		ids <- which(data[,'Åldern'] == age & data[,'CRP'] )
+	}else{
+		ids <- which(data[,'Åldern'] == age & data[,'STREP'] )
+	}
+	#browser()
+	m = median( as.numeric(as.character( data[ids,column] )))
+	s = mad ( as.numeric(as.character( data[ids,column] )))
+	c (m , s)
+}
+
+result_table <- function (column,  crp=T) {
+	t <- NULL
+	for ( n in levels(data[,'Åldern']) ) {
+		t = rbind(t, median_mad_age ( column, n, crp ))
+	}
+	colnames(t) <- c( 'median', 'mad' )
+	rownames(t) <- levels(data[,'Åldern'])
+	t
+}
+
 
  mean_sd_age( 'Fråga..9', '0-3', crp=T)
 #[1] 4.384615 3.132085
@@ -623,6 +646,172 @@ mean_cor_test( 'Fråga..8', 'Fråga..9')
 #
 #$mean.estimate
 #[1] 0.5292124
+
+
+ mean_cor_test( 'Fråga..8', 'Fråga..9', 'spearman')
+#$mean.p.value
+#[1] 1.126521e-08
+
+#$mean.estimate
+#[1] 0.4704633
+
+ mean_cor_test( 'Fråga..8', 'Fråga..10', 'spearman')
+#$mean.p.value
+#[1] 1.464139e-08
+
+#$mean.estimate
+#[1] 0.5748656
+
+#Es gab 50 oder mehr Warnungen (Anzeige der ersten 50 mit warnings())
+
+t = read.delim('all_data.csv', sep=';') # manually changed diagnos
+DIAGNOS <- as.character(t[,36])
+data$Diagnos = factor( str_replace(DIAGNOS, "^ ", "" ), levels=c("GI", "Isolerad feber", "Luftvägssymtom", "Luftvägssymtom+UVI", "UVI" ))
+
+
+round(table(data$Diagnos) / sum( table(data$Diagnos) ) * 100,1)
+
+#                GI     Isolerad feber     Luftvägssymtom Luftvägssymtom+UVI 
+#              10.1               10.1               75.8                1.3 
+#               UVI 
+#               2.7 
+
+
+
+# 2017-09-01
+
+# Könsfördelningen + Diagram i Åldersgruppen
+
+
+Plot = function (p, file ) {
+	pdf(file=paste("../figures/",file,'.pdf',sep=''), width=4, height=4)
+	print(p)
+	dev.off()
+	png(file=paste("../figures/",file,'.png',sep=''), width=600, height=600)
+	print(p)
+	dev.off()
+}
+
+
+data$data.9 <- as.numeric(as.character(data$Fråga..9))
+data$data.10 <- as.numeric(as.character(data$Fråga..10))
+
+data$tidigare_provtagning = FALSE
+data$tidigare_provtagning[unique(c(
+	which(data$Fråga.4a.N.J=='j'),
+	which(data$Fråga.4bN.J=='j')
+	))] = TRUE
+
+CRP <- data[which(data$CRP),]
+STREP <- data[which(data$STREP),]
+
+
+library(reshape2)
+
+ag <- table(data$kön , data$Åldern)
+ag <- ag[-2,]
+ag_melted = melt(ag)
+colnames(ag_melted) <- c('kön', 'Ålder','value')
+
+pl = ggplot(data=ag_melted, 
+	aes (x=ag_melted$'Ålder', y=ag_melted$'value', fill=ag_melted$'kön')
+     ) +
+geom_bar(stat="identity", color="black", position=position_dodge())+
+theme_minimal()
+pl = pl + xlab('Ålder') + ylab('patient [n]') + labs(fill = "Kön")
+	
+Plot( pl, 'Åldersfördelning_kön')
+
+## Åldersfördelning_ tidigare provtagning
+
+ta <- table(data$tidigare_provtagning , data$Åldern)
+
+write.table(ta, file="tables/provtagning_age.tab", sep="\t",quote=F)
+d <- read.delim("tables/provtagning_age.tab")
+colnames(d) <- colnames(ta)
+d = rbind(d, d[1,] / ( d[1,] +d[2,]) *100)
+d = rbind(d, d[2,] / ( d[1,] +d[2,]) *100)
+
+rownames(d) <- c('No','Yes', 'No [%]', 'Yes [%]' )
+
+d = cbind( measure=rownames(d), d)
+
+
+ta_melted = melt(d[4:3,])
+ta_melted[,1] <- factor( as.character(ta_melted[,1]), levels=c('Yes [%]','No [%]'))
+
+colnames(ta_melted) <- c( 'tidigare_provtagning', 'Ålder', 'value')
+
+pl = ggplot(data=ta_melted, 
+	aes (x=Ålder, y=value, fill=tidigare_provtagning)
+     ) +
+geom_bar(stat="identity", color="black", position=position_dodge())+
+#geom_bar(stat="identity", color="black")+
+theme_minimal()
+pl = pl + xlab('Ålder') + ylab('patient [%]') + labs(fill = "tidigare provtagning")
+#pl = pl + scale_fill_manual(values=c('green','lightgray'))
+
+Plot(pl, 'Åldersfördelning_tidigare provtagning')
+
+#Total %
+summary(data$tidigare_provtagning)
+#   Mode   FALSE    TRUE    NA's 
+#logical      22     133       0 
+
+133/ (133+22) *100
+#[1] 85.80645
+
+
+# Diagramm boxplot Fråga..9 and Fråga..10 STREP, CRP and all
+
+
+
+Plot(ggplot(data, aes( Åldern, data.9 )) +geom_boxplot() +ylab('') +
+	scale_y_continuous(breaks=c(0,2,4,6,8, 10)),
+	'Question_9_all' )
+
+
+Plot(ggplot(CRP, aes( Åldern, data.9 )) +geom_boxplot() +ylab('')+
+	scale_y_continuous(breaks=c(0,2,4,6,8, 10)),
+	'Question_9_CRP' )
+
+Plot(ggplot(STREP, aes( Åldern, data.9 )) +geom_boxplot() +ylab('')+
+	scale_y_continuous(breaks=c(0,2,4,6,8, 10)),
+	'Question_9_STREP' )
+
+
+## question 10
+
+Plot(ggplot(data, aes( Åldern, data.10 )) +geom_boxplot(na.rm = TRUE) +ylab('')+
+	scale_y_continuous(breaks=c(0,2,4,6,8, 10)),
+	'Question_10_all' )
+
+
+Plot(ggplot(CRP, aes( Åldern, data.10 )) +geom_boxplot() +ylab('')+
+	scale_y_continuous(breaks=c(0,2,4,6,8, 10)),
+	'Question_10_CRP' )
+
+Plot(ggplot(STREP, aes( Åldern, data.10 )) +geom_boxplot() +ylab('')+
+	scale_y_continuous(breaks=c(0,2,4,6,8, 10)),
+	'Question_10_STREP' )
+
+
+## question 8
+
+Plot(ggplot(data, aes( Åldern, Fråga..8 )) +geom_boxplot(na.rm = TRUE) +ylab('')+
+	scale_y_continuous(breaks=c(0,2,4,6,8, 10)),
+	'Question_8_all' )
+
+
+Plot(ggplot(CRP, aes( Åldern, Fråga..8 )) +geom_boxplot() +ylab('')+
+	scale_y_continuous(breaks=c(0,2,4,6,8, 10)),
+	'Question_8_CRP' )
+
+Plot(ggplot(STREP, aes( Åldern, Fråga..8 )) +geom_boxplot() +ylab('')+
+	scale_y_continuous(breaks=c(0,2,4,6,8, 10)),
+	'Question_8_STREP' )
+
+
 
 
 
