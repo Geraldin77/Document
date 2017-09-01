@@ -13,5 +13,63 @@ pie(table(data[,2]), col=rainbow(length(table(data[,2])), clockwise==T)
 )
 pie(table(data[,2]), col=rainbow(length(table(data[,2]))), clockwise==T)
 pie(table(data[,2]), col=rainbow(length(table(data[,2]))), clockwise=T)
-pie(table(data[,2]), col=rainbow(length(table(data[,2]))), clockwise=T)
 rainbow(length(table(data[,2])))
+load("/Users/lomax2/Documents/git/Document/data/data.RData")
+ls()
+summay(data)
+sumay(data)
+summay(data)
+summary(data)
+mean_sd_age <- function( column, age, crp=T ) {#
+	if ( crp ) {#
+		ids <- which(data[,'Åldern'] == age & data[,'CRP'] )#
+	}else{#
+		ids <- which(data[,'Åldern'] == age & data[,'STREP'] )#
+	}#
+	#browser()#
+	m = mean( as.numeric(as.character( data[ids,column] )))#
+	s = sd ( as.numeric(as.character( data[ids,column] )))#
+	c (m , s)#
+}
+mean_sd_age( 'kön' )
+mean_sd_age( 'kön' ,'0-3')
+mean_sd_age( 'kön' ,'4-6')
+mean_sd_age( 'kön' ,'0-3')
+load('data.RData')
+ls()
+data
+mean_sd_age( 'kön' ,'0-3')
+table( data$Åldern, data$kön)
+table( data$Åldern, data$kön)
+table( data$'Åldern', data$'kön')
+ak = table( data$'Åldern', data$'kön')
+ak[,1]/ak[,3]
+ak[,1]/(ak[,1] +ak[,3])
+19/(11+19)
+name= c("DD","with himself","with DC","with Silur" ,"DC","with himself","with DD","with Silur" ,"Silur","with himself","with DD","with DC" )#
+average= sample(seq(1,10) , 12 , replace=T)#
+number= sample(seq(4,39) , 12 , replace=T)#
+data=data.frame(name,average,number)
+data
+load('data.RData')
+ak
+ak <- ak[,-2]
+ak
+melt( ak)
+library(reshape)
+install.packages(reshape)
+install.packages('reshape')
+library(reshape)
+melt( ak)
+melted_ak = melt( ak)
+colnames(melted_ak)
+colnames(melted_ak) <- c ('Ålder', 'kön', 'value')
+my_bar=barplot(data$average , border=F , names.arg=data$name , las=2 , col=c(rgb(0.3,0.1,0.4,0.6) , rgb(0.3,0.5,0.4,0.6) , rgb(0.3,0.9,0.4,0.6) ,  rgb(0.3,0.9,0.4,0.6)) , ylim=c(0,11) , main="" )#
+abline(v=c(4.9 , 9.7) , col="grey")
+my_bar=barplot(melted_ak$'Ålder' , border=F , names.arg=meted_ak$kön , las=2 , col=c(rgb(0.3,0.1,0.4,0.6) , rgb(0.3,0.5,0.4,0.6) , rgb(0.3,0.9,0.4,0.6) ,  rgb(0.3,0.9,0.4,0.6)) , ylim=c(0,11) , main="" )#
+abline(v=c(4.9 , 9.7) , col="grey")
+my_bar=barplot(melted_ak[,1] , border=F , names.arg=meted_ak[,2] , las=2 , col=c(rgb(0.3,0.1,0.4,0.6) , rgb(0.3,0.5,0.4,0.6) , rgb(0.3,0.9,0.4,0.6) ,  rgb(0.3,0.9,0.4,0.6)) , ylim=c(0,11) , main="" )#
+abline(v=c(4.9 , 9.7) , col="grey")
+my_bar=barplot(melted_ak[,1] , border=F , names.arg=melted_ak[,2] , las=2 , col=c(rgb(0.3,0.1,0.4,0.6) , rgb(0.3,0.5,0.4,0.6) , rgb(0.3,0.9,0.4,0.6) ,  rgb(0.3,0.9,0.4,0.6)) , ylim=c(0,11) , main="" )
+melted_ak
+my_bar=barplot(melted_ak[,1] , border=F , names.arg=melted_ak[,2] , las=2  )
