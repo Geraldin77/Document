@@ -1,0 +1,22 @@
+\section{Methods}
+
+The data was analyzed using R version 3.3.2. No extra packages were required.
+
+\subsection{summary statistics}
+
+Data are alwas shown and described as median and median absolute deviation
+(MAD) and displayed using boxplots.
+
+\subsection{linear statistical analysis}
+
+As the data was not normal distributed we did use the non parametric spearman
+correlation to access the significance level of the answers ranging from 0 (no
+pain) to 10 (lots of pain) using the cor.test R function. As the data did
+contain many duplicate values (bindings) we added a small error value to the raw data using the R jitter
+function and re-ran the statistic test 1000 times each. The
+mean p value and mean correlation coefficient are reported.
+
+\subsection{grouped tests}
+
+The Wilcox Signed Rank test was used for two group comparisons performed in the
+same way as the linear tests.

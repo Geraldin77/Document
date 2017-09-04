@@ -600,6 +600,13 @@ boxplot( as.numeric(as.character(data$Fråga..9))[only_1], as.numeric(as.charact
 #mean of x mean of y 
 # 3.550000  2.560606 
 
+wilcox.test( as.numeric(as.character(data$Fråga..9))[only_1], as.numeric(as.character(data$Fråga..9))[more_than_1])
+
+#	Wilcoxon rank sum test with continuity correction
+
+#data:  as.numeric(as.character(data$Fråga..9))[only_1] and as.numeric(as.character(data$Fråga..9))[more_than_1]
+#W = 779.5, p-value = 0.2127
+#alternative hypothesis: true location shift is not equal to 0
 
 boxplot( as.numeric(as.character(data$Fråga..10))[only_1], as.numeric(as.character(data$Fråga..10))[more_than_1])
 
@@ -615,6 +622,40 @@ t.test( as.numeric(as.character(data$Fråga..10))[only_1], as.numeric(as.charact
 #sample estimates:
 #mean of x mean of y 
 # 2.600000  2.395833 
+
+wilcox.test( as.numeric(as.character(data$Fråga..10))[only_1], as.numeric(as.character(data$Fråga..10))[more_than_1])
+
+#	Wilcoxon rank sum test with continuity correction
+
+#data:  as.numeric(as.character(data$Fråga..10))[only_1] and as.numeric(as.character(data$Fråga..10))[more_than_1]
+#W = 244.5, p-value = 0.9321
+#alternative hypothesis: true location shift is not equal to 0
+
+two_group <- function ( data1, data2 ) {
+	d <- vector('numeric', 1000)
+        s <- vector('numeric', 1000)
+	for ( i in 1:1000 ) {
+		t <- wilcox.test( jitter(data1), jitter(data2) )
+		d[i] <- t$p.value
+		s[i] <- t$statistic
+	}
+	list( mean.p.value =mean (d), mean.statistics=mean(s))
+}
+
+two_group( as.numeric(as.character(data$Fråga..9))[only_1], as.numeric(as.character(data$Fråga..9))[more_than_1])
+#$mean.p.value
+#[1] 0.2321051
+
+#$mean.statistics
+#[1] 779.902
+
+
+two_group( as.numeric(as.character(data$Fråga..10))[only_1], as.numeric(as.character(data$Fråga..10))[more_than_1] )
+#$mean.p.value
+#[1] 0.7956872
+
+#$mean.statistics
+#[1] 244.338
 
 
 mean_cor_test <- function (colA, colB,  method="pearson" ) {
@@ -722,6 +763,9 @@ pl = pl + xlab('Ålder') + ylab('patient [n]') + labs(fill = "Kön")
 	
 Plot( pl, 'Åldersfördelning_kön')
 
+write.table(ag_melted, file="../tables/Åldersfördelning_kön.xls", sep="\t", quote=F,row.names=F)
+
+
 ## Åldersfördelning_ tidigare provtagning
 
 ta <- table(data$tidigare_provtagning , data$Åldern)
@@ -752,6 +796,9 @@ pl = pl + xlab('Ålder') + ylab('patient [%]') + labs(fill = "tidigare provtagni
 #pl = pl + scale_fill_manual(values=c('green','lightgray'))
 
 Plot(pl, 'Åldersfördelning_tidigare provtagning')
+
+write.table(ta_melted, file="../tables/Åldersfördelning_tidigare provtagning.xls", sep="\t", quote=F,row.names=F)
+
 
 #Total %
 summary(data$tidigare_provtagning)
