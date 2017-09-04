@@ -1,4 +1,8 @@
 /tmp/
+<<<<<<< Upstream, based on branch 'master' of https://github.com/Geraldin77/Document.git
 /document.pdf
 /document.synctex.gz
 .project
+=======
+/.project
+>>>>>>> 9dffad0 Small test - working?
