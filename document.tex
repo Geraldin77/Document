@@ -4,11 +4,37 @@
 %%
 
 
-%\documentclass[12pt]{article}
-%\usepackage{times}
-%\renewcommand{\baselinestretch}{1.5} 
+\documentclass[12pt,twocolumn]{article}
+\usepackage{times}
+\renewcommand{\baselinestretch}{1.5} 
+\newenvironment{affiliations}{%
+    \setcounter{enumi}{1}%
+    \setlength{\parindent}{0in}%
+    \slshape\sloppy%
+    \begin{list}{\upshape$^{\arabic{enumi}}$}{%
+        \usecounter{enumi}%
+        \setlength{\leftmargin}{0in}%
+        \setlength{\topsep}{0in}%
+        \setlength{\labelsep}{0in}%
+        \setlength{\labelwidth}{0in}%
+        \setlength{\listparindent}{0in}%
+        \setlength{\itemsep}{0ex}%
+        \setlength{\parsep}{0in}%
+        }
+    }{\end{list}\par\vspace{12pt}}
 
-\documentclass{nature}
+%% Redefine the abstract environment to be the first bold paragraph
+\renewenvironment{abstract}{%
+    \setlength{\parindent}{0in}%
+    \setlength{\parskip}{0in}%
+    \bfseries%
+    }{\par\vspace{-6pt}}
+
+
+
+
+
+%\documentclass{nature}
 %\documentclass{article}
 
 
@@ -28,6 +54,8 @@ Johansson$^2$}
 
 \begin{document}
 
+\onecolumn
+
 \maketitle
 
 \begin{affiliations}
@@ -41,175 +69,196 @@ Abstract is missing up to now!
 \end{abstract}
 
 
+\twocolumn
+
+\newpage
+
 \section{Backgrund}
 
-R\"adsla och sm\"arta i samband med provtagning p\r{a} barn \"ar vanligt f\"orekommande, men
-s\"allan n\r{a}got vi l\"akare beh\"over konfronteras med n\"ar vi skickar ut barnet till
-labbet. Ju mindre barnet \"ar desto sv\r{a}rare har det att f\"orst\r{a} n\"odv\"andigheten av
-en ibland sm\"artsam procedur och reagerar med r\"adsla och oro. Inte bara fysisk
-skada kan leda till sm\"arta utan \"aven f\"orv\"antad sm\"arta kan leda till oro och
-\r{a}ngest, som i sin tur f\"orst\"arker sm\"artupplevelsen (1). Man trodde l\"ange att sm\r{a}
-barn inte kunde k\"anna sm\"arta p\r{a} samma s\"att som vuxna d\r{a} deras nervsystem var
-omoget (2). Under de senaste 30 \r{a}ren har forskning kring barns sm\"arta dock visat
-att att \"aven sm\r{a} barn har ett minne av sm\"arta (3-5). Minnen av sm\"artsamma
-upplevelser kan bidra till negativa upplevelser av v\r{a}rden och d\"armed f\"orsv\r{a}ra
-barnets framtida kontakter med sjukv\r{a}rden (6). Dessa aspekter ger oss l\"akare ett
-stort ansvar och \"ar n\r{a}got som vi beh\"over beakta i v\r{a}r kliniska vardag.
+R\"adsla och sm\"arta i samband med provtagning p\r{a} barn \"ar vanligt
+f\"orekommande, men s\"allan n\r{a}got vi l\"akare beh\"over konfronteras med
+n\"ar vi skickar ut barnet till labbet. Ju mindre barnet \"ar desto sv\r{a}rare
+har det att f\"orst\r{a} n\"odv\"andigheten av en ibland sm\"artsam procedur och
+reagerar med r\"adsla och oro. Inte bara fysisk skada kan leda till sm\"arta
+utan \"aven f\"orv\"antad sm\"arta kan leda till oro och \r{a}ngest, som i sin
+tur f\"orst\"arker sm\"artupplevelsen \cite{Carverius2014}.
+Man trodde l\"ange att sm\r{a} barn inte kunde k\"anna sm\"arta p\r{a} samma
+s\"att som vuxna d\r{a} deras nervsystem var omoget \cite{Rey1993}. Under de
+senaste 30
+\r{a}ren har forskning kring barns sm\"arta dock visat att att \"aven sm\r{a}
+barn har ett minne av sm\"arta \cite{Anand2007,Fitzgerald2001,Schechter2003}.
+Minnen av sm\"artsamma upplevelser kan bidra till negativa upplevelser av
+v\r{a}rden och d\"armed f\"orsv\r{a}ra barnets framtida kontakter med
+sjukv\r{a}rden \cite{vBayer2004}. Dessa aspekter ger oss l\"akare ett stort
+ansvar och \"ar n\r{a}got som vi beh\"over beakta i v\r{a}r kliniska vardag.
 
-En betydande andel av bes\"ok p\r{a} VC utg\"ors av sm\r{a} barn med infektionssymtom. De
-patientn\"ara analyserna f\"or identifiering av Betahemolytiska streptokocker grupp
-A (Strep-A) och C-reaktivt protein (CRP) \"ar diagnostiska verktyg i l\"akarens
-kliniska vardag, som i b\"asta fall kan minska l\"akarens os\"akerhet och f\"orb\"attra
-diagnoss\"attning vid infektioner i \"oppenv\r{a}rden. Men ut\"over att vara f\"orknippat
-med sm\"arta och oro \"ar tolkning av testresultaten inte helt okomplicerat.
+En betydande andel av bes\"ok p\r{a} VC utg\"ors av sm\r{a} barn med
+infektionssymtom. De patientn\"ara analyserna f\"or identifiering av
+Betahemolytiska streptokocker grupp A (Strep-A) och C-reaktivt protein (CRP)
+\"ar diagnostiska verktyg i l\"akarens kliniska vardag, som i b\"asta fall kan
+minska l\"akarens os\"akerhet och f\"orb\"attra diagnoss\"attning vid
+infektioner i \"oppenv\r{a}rden. Men ut\"over att vara f\"orknippat med sm\"arta
+och oro \"ar tolkning av testresultaten inte helt okomplicerat.
 Exempelvis ger analys av CRP, ett akutfasprotein som stiger vid
 infektionssjukdomar och inflammation, s\"allan v\"agledning f\"or om antibiotika
-beh\"ovs eller ej. Vid okomplicerad infektion utan allm\"anp\r{a}verkan har testet ringa
-v\"arde och det ska helst ha g\r{a}tt 24 timmar efter insjuknandet f\"or att testet
-skall vara tillf\"orlitligt. Vissa lokala allvarliga infektioner ger heller inte
-kraftig stegring av CRP tidigt i f\"orloppet (7).
+beh\"ovs eller ej. Vid okomplicerad infektion utan allm\"anp\r{a}verkan har
+testet ringa v\"arde och det ska helst ha g\r{a}tt 24 timmar efter insjuknandet
+f\"or att testet skall vara tillf\"orlitligt. Vissa lokala allvarliga
+infektioner ger heller inte kraftig stegring av CRP tidigt i f\"orloppet
+\cite{Tecken2014}.
 
-\"aven identifiering av streptokocktonsilliter med snabbtestet Strep-A, medf\"or
-diagnostiska dilemman. Enligt tillverkarna har testet en sensitivitet p\r{a} > 93\%
-och en specificitet p\r{a} > 94\%. Ett problem \"ar dock att en betydande andel av
-alla
-barn \"ar b\"arare av streptokocker vintertid, utan att vara sjuka. D\r{a} merparten av
-halsinfektioner \"ar orsakade av virus riskerar testet, om taget p\r{a} fel grund, att
-felklassificera virusinfektioner som streptokocktonsilliter hos b\"arare.
+\"Aven identifiering av streptokocktonsilliter med snabbtestet Strep-A, medf\"or
+diagnostiska dilemman. Enligt tillverkarna har testet en sensitivitet p\r{a} >
+93\% och en specificitet p\r{a} $>$ 94\%. Ett problem \"ar dock att en betydande
+andel av alla barn \"ar b\"arare av streptokocker vintertid, utan att vara
+sjuka. D\r{a} merparten av halsinfektioner \"ar orsakade av virus riskerar
+testet, om taget p\r{a} fel grund, att felklassificera virusinfektioner som
+streptokocktonsilliter hos b\"arare.
 
-Trots att det finns p\r{a}visat ett samband mellan h\"og f\"orskrivning av antibiotika
-och h\"og anv\"andning av CRP och Strep-A (8) har snabbtesterna fortfarande stor
-anv\"andning i prim\"arv\r{a}rden. I en tidigare studie fr\r{a}n Canada har man belyst barns
-upplevelser och erfarenheter av ven\"os provtagning (9). I studien har man bland
-annat visat ett samband mellan barns \r{a}lder och upplevelser vid provtagning samt
-visat att f\"or\"aldrar v\"al kan f\"oruts\"aga barnets v\"antade reaktion under provtagning
-(9). Samma studie har \"aven indikerat att f\"or\"aldrars oro korrelerar med barnets
-stressupplevelse vid ven\"os provtagning.
+Trots att det finns p\r{a}visat ett samband mellan h\"og f\"orskrivning av
+antibiotika och h\"og anv\"andning av CRP och Strep-A \cite{Studie2014} har
+snabbtesterna fortfarande stor anv\"andning i prim\"arv\r{a}rden. I en tidigare
+studie fr\r{a}n Canada har man belyst barns upplevelser och erfarenheter av
+ven\"os provtagning \cite{Fradet1990}. I studien har man bland annat visat ett
+samband mellan barns \r{a}lder och upplevelser vid provtagning samt visat att
+f\"or\"aldrar v\"al kan f\"oruts\"aga barnets v\"antade reaktion under
+provtagning \cite{Fradet1990}. Samma studie har \"aven indikerat att
+f\"or\"aldrars oro korrelerar med barnets stressupplevelse vid ven\"os
+provtagning.
 
-Vi k\"anner inte till n\r{a}gon studie som tittat p\r{a} barn och f\"or\"aldrars erfarenheter
-av provtagning med de patientn\"ara analyserna CRP och Strep-A. Vi k\"anner inte
-heller till att liknande studier genomf\"orts i prim\"arv\r{a}rden.
+Vi k\"anner inte till n\r{a}gon studie som tittat p\r{a} barn och f\"or\"aldrars
+erfarenheter av provtagning med de patientn\"ara analyserna CRP och Strep-A. Vi
+k\"anner inte heller till att liknande studier genomf\"orts i
+prim\"arv\r{a}rden.
 
 Syftet med denna studie var att belysa barns sm\"artupplevelser vid provtagning.
 Vi ville \"aven studera eventuellt samband mellan barns sm\"artupplevelser och
-faktorer som \r{a}lder, k\"on, tidigare exponering f\"or provtagning och f\"or\"aldrarnas
-f\"oruts\"agelse av barnets sm\"artreaktion.
+faktorer som \r{a}lder, k\"on, tidigare exponering f\"or provtagning och
+f\"or\"aldrarnas f\"oruts\"agelse av barnets sm\"artreaktion.
 
 \section{Vetenskapliga Fr\r{a}gest\"allningar}
 
-Hur vanligt f\"orekommande \"ar sm\"arta vid patientn\"ara provtagning p\r{a} N\"asets
-L\"akargrupp (NLG).
-Finns det skillnad i utfall (sj\"alvskattad sm\"arta) beroende p\r{a} barnets \r{a}lder,
-k\"on, tidigare exponering f\"or provtagning? V\r{a}r hypotes var att barnets
-sm\"artupplevelse avtar med stigande \r{a}lder.
-Finns samband mellan utfall och f\"or\"aldrarnas f\"oruts\"agelse av barnets reaktion,
-ev stickr\"adsla hos f\"or\"aldrarna? V\r{a}r hypotes var att f\"or\"aldrar kan f\"orutse sitt
-barns sm\"artrespons.
+Hur vanligt f\"orekommande \"ar sm\"arta vid patientn\"ara provtagning p\r{a}
+N\"asets L\"akargrupp (NLG)?
+Finns det skillnad i utfall (sj\"alvskattad sm\"arta) beroende p\r{a} barnets
+\r{a}lder, k\"on, tidigare exponering f\"or provtagning? V\r{a}r hypotes var att
+barnets sm\"artupplevelse avtar med stigande \r{a}lder.
+Finns samband mellan utfall och f\"or\"aldrarnas f\"oruts\"agelse av barnets
+reaktion, ev stickr\"adsla hos f\"or\"aldrarna? V\r{a}r hypotes var att
+f\"or\"aldrar kan f\"orutse sitt barns sm\"artrespons.
 
 \section{Method}
 
-Barn i \r{a}ldersgruppen 0-17 \r{a}r, som skickade till labbet p\r{a} NLG f\"or patientn\"ara
-analys (CRP, Strep-A), ingick i studien. \"aven f\"or\"aldrar till barnen som deltog
-ingick i studien. Deltagandet i studien var oberoende av symtom barnet s\"okte f\"or
-och studien inkluderade \"aven barn med underliggande kronisk sjukdom.
+Barn i \r{a}ldersgruppen 0-17 \r{a}r, som skickade till labbet p\r{a} NLG f\"or
+patientn\"ara analys (CRP, Strep-A), ingick i studien. \"Aven f\"or\"aldrar till
+barnen som deltog ingick i studien. Deltagandet i studien var oberoende av
+symtom barnet s\"okte f\"or och studien inkluderade \"aven barn med
+underliggande kronisk sjukdom.
 
 Innan provtagning, ute i v\"antrummet, presenterades syftet med studien f\"or
-f\"or\"aldern och barnet med hj\"alp av ett informationsblad. F\"or\"aldern fick fylla i
-en kort enk\"at kring vad barnet hade f\"or besv\"ar vid bes\"oket (t ex feber, halsont,
-hosta) samt ange huruvida de upplevde att barnets allm\"antillst\r{a}nd hade
-f\"ors\"amrats eller ej senaste dygnet. F\"or\"aldern fick \"aven kryssa f\"or om man hade
-\"onskem\r{a}l om att det skulle tas prov i samband med bes\"oket, om detta var n\r{a}got
-man f\"orv\"antade sig. I enk\"aten ombads f\"or\"aldern uppge om barnet tagit n\r{a}gon prov
-p\r{a} VC (stick i fingret, svalgprov) tidigare och om barnet blev ledsen i samband
-med f\"orra provtagningen. F\"or\"aldern ombads \"aven skatta, enligt en 10 cm visuell
-analog skala, hur dom trodde att barnet skulle reagera vid dagens provtagning.
-Ena \"anden av skalan definierades som “lugn, ingen oro” andra \"anden som “mycket
-ledsen, mycket orolig”. Enligt denna skala ombads f\"or\"aldern \"aven skatta vad dom
-sj\"alva tycker om att ta prov.
+f\"or\"aldern och barnet med hj\"alp av ett informationsblad. F\"or\"aldern fick
+fylla i en kort enk\"at kring vad barnet hade f\"or besv\"ar vid bes\"oket (t ex
+feber, halsont, hosta) samt ange huruvida de upplevde att barnets
+allm\"antillst\r{a}nd hade f\"ors\"amrats eller ej senaste dygnet. F\"or\"aldern
+fick \"aven kryssa f\"or om man hade \"onskem\r{a}l om att det skulle tas prov i
+samband med bes\"oket, om detta var n\r{a}got man f\"orv\"antade sig. I
+enk\"aten ombads f\"or\"aldern uppge om barnet tagit n\r{a}gon prov p\r{a} VC
+(stick i fingret, svalgprov) tidigare och om barnet blev ledsen i samband med
+f\"orra provtagningen. F\"or\"aldern ombads \"aven skatta, enligt en 10 cm
+visuell analog skala, hur dom trodde att barnet skulle reagera vid dagens
+provtagning.
+Ena \"anden av skalan definierades som “lugn, ingen oro” andra \"anden som
+“mycket ledsen, mycket orolig”. Enligt denna skala ombads f\"or\"aldern \"aven
+skatta vad dom sj\"alva tycker om att ta prov.
 
-Direkt efter provtagning ombads f\"or\"aldern, enligt samma skala som ovan, skatta
-hur deras barn tedde sig i v\"antrummet inf\"or provtagning samt barnets reaktion
-under sj\"alva provtagningen.
+Direkt efter provtagning ombads f\"or\"aldern, enligt samma skala som ovan,
+skatta hur deras barn tedde sig i v\"antrummet inf\"or provtagning samt barnets
+reaktion under sj\"alva provtagningen.
 
-Direkt efter provtagningen bad en sk\"oterska p\r{a} labbet \"aven barnet skatta sin
-upplevda sm\"arta i samband med provtagningen. Barn har i forskning uppgett att
-dom f\"oredrar sm\"artskalor med ansikten (facial pain scales, FPS) framf\"or andra
-typer av sj\"alvskattningsinstrument (10). Av denna anledning valde vi att anv\"anda
-den v\"alk\"anda Wong-Baker FACES Sm\"artskala i v\r{a}r studie (bild 1). Denna skala
-visar en serie ansikten d\"ar \"anden vid 0 visar ett glatt ansikte “ingen sm\"arta”
-och \"anden vid 10 visar ett gr\r{a}tande ansikte “v\"arsta t\"ankbara sm\"arta”.
+Direkt efter provtagningen bad en sk\"oterska p\r{a} labbet \"aven barnet skatta
+sin upplevda sm\"arta i samband med provtagningen. Barn har i forskning uppgett
+att dom f\"oredrar sm\"artskalor med ansikten (facial pain scales, FPS)
+framf\"or andra typer av sj\"alvskattningsinstrument \cite{vBayer2006}. Av denna
+anledning valde vi att anv\"anda den v\"alk\"anda Wong-Baker FACES Sm\"artskala
+i v\r{a}r studie (bild 1). Denna skala visar en serie ansikten d\"ar \"anden vid
+0 visar ett glatt ansikte “ingen sm\"arta” och \"anden vid 10 visar ett
+gr\r{a}tande ansikte “v\"arsta t\"ankbara sm\"arta”.
 
 
-Sm\"arta \"ar alltid subjektiv och det \"ar en utmaning att utv\"ardera sm\"arta hos barn.
-Inom h\"also- och sjukv\r{a}rden \"ar sj\"alvskattning ett f\"orstahandsval vid bed\"omning av
-sm\"arta. Ansiktsskalor har visat validitet fr\r{a}n 4 \r{a}rs \r{a}lder (11, 12). D\r{a} barn i
-\r{a}ldersgruppen 0-3 \r{a}r inte \"ar kapabla till sj\"alvskattning, har vi inte haft
-m\"ojlighet att analysera dessa uppgifter enligt v\r{a}rt studieuppl\"agg. Barn yngre \"an
-4 \r{a}r exkluderades d\"arf\"or fr\r{a}n den delen av studien d\"ar barnet ombads skatta sin
-sm\"arta i samband med provtagning. Av egen erfarenhet, som b\r{a}de l\"akare och
-f\"or\"alder, tror vi dock att barn i \r{a}ldersgruppen 0-3 \r{a}r \"ar extra vulnerabla vid
-provtagning. Vi bad d\"arf\"or f\"or\"aldrar fylla i enk\"aten \"aven f\"or barn under 4 \r{a}r.
+Sm\"arta \"ar alltid subjektiv och det \"ar en utmaning att utv\"ardera sm\"arta
+hos barn.
+Inom h\"also- och sjukv\r{a}rden \"ar sj\"alvskattning ett f\"orstahandsval vid
+bed\"omning av sm\"arta. Ansiktsskalor har visat validitet fr\r{a}n 4 \r{a}rs
+\r{a}lder (11, 12). D\r{a} barn i \r{a}ldersgruppen 0-3 \r{a}r inte \"ar kapabla
+till sj\"alvskattning, har vi inte haft m\"ojlighet att analysera dessa
+uppgifter enligt v\r{a}rt studieuppl\"agg. Barn yngre \"an 4 \r{a}r exkluderades
+d\"arf\"or fr\r{a}n den delen av studien d\"ar barnet ombads skatta sin sm\"arta
+i samband med provtagning. Av egen erfarenhet, som b\r{a}de l\"akare och
+f\"or\"alder, tror vi dock att barn i \r{a}ldersgruppen 0-3 \r{a}r \"ar extra
+vulnerabla vid provtagning. Vi bad d\"arf\"or f\"or\"aldrar fylla i enk\"aten
+\"aven f\"or barn under 4 \r{a}r.
 
-Vi valde att inte s\"atta n\r{a}gon \"ovre \r{a}ldersgr\"ans f\"or deltagande av barn, f\"orutsatt
-att en f\"or\"alder medf\"oljde vid l\"akarbes\"oket och provtagningen.
+Vi valde att inte s\"atta n\r{a}gon \"ovre \r{a}ldersgr\"ans f\"or deltagande av
+barn, f\"orutsatt att en f\"or\"alder medf\"oljde vid l\"akarbes\"oket och
+provtagningen.
 
-M\r{a}ls\"attningen var att samla in enk\"ater under \r{a}tminstone en s\"asong med h\"og
-f\"orekomsts av infektioner hos barn. Vi samlade in totalt 156 enk\"ater.
+M\r{a}ls\"attningen var att samla in enk\"ater under \r{a}tminstone en s\"asong
+med h\"og f\"orekomsts av infektioner hos barn. Vi samlade in totalt 156
+enk\"ater.
 Majoriteten av alla enk\"ater samlades in under perioden november-16 till
 april-17.
 
-Enk\"aterna utformats s\r{a} att det framgick vilket test, CRP eller Strep-A, som
-analyserades. N\r{a}gra g\r{a}nger (n=6) hade l\"akaren ordinerat b\r{a}de CRP och Strep-A. D\r{a}
-fick barnet skatta sin sm\"artresponsen enligt FRS f\"or b\r{a}da proverna separat.
+Enk\"aterna utformats s\r{a} att det framgick vilket test, CRP eller Strep-A,
+som analyserades. N\r{a}gra g\r{a}nger (n=6) hade l\"akaren ordinerat b\r{a}de
+CRP och Strep-A. D\r{a} fick barnet skatta sin sm\"artresponsen enligt FRS f\"or
+b\r{a}da proverna separat.
 
-Resultat fr\r{a}n studien… kommer att beskrivas deskriptivt. F\"or att studera samband
-mellan variabler kommer vi att anv\"anda analytisk statistik, prelimin\"art
-Chi-tv\r{a}-test som \"ar en metod som har utvecklats f\"or att analysera data d\r{a}
-variabler har ordinalskala.
+Resultat fr\r{a}n studien… kommer att beskrivas deskriptivt. F\"or att studera
+samband mellan variabler kommer vi att anv\"anda analytisk statistik,
+prelimin\"art Chi-tv\r{a}-test som \"ar en metod som har utvecklats f\"or att
+analysera data d\r{a} variabler har ordinalskala.
 
 Projektet var ett internt forskningsarbete enligt vetenskapliga principer.
-Ans\"okan till etikn\"amnd genomf\"ordes d\"arf\"or ej. Verksamhetschefen gav sin
-till\r{a}telse till att v\r{a}r enk\"atbaserade unders\"okning genomf\"ordes. Insamlade
-uppgifter var helt anonyma och det \"ar inte m\"ojligt att identifiera patienterna
-eller deras f\"or\"aldrar genom enk\"aten. Deltagandet var helt frivilligt. Studien
-kommer inte att publiceras offentligt.
+Ans\"okan till etikn\"amnd genomf\"ordes d\"arf\"or ej. Verksamhetschefen gav
+sin till\r{a}telse till att v\r{a}r enk\"atbaserade unders\"okning
+genomf\"ordes. Insamlade uppgifter var helt anonyma och det \"ar inte m\"ojligt
+att identifiera patienterna eller deras f\"or\"aldrar genom enk\"aten.
+Deltagandet var helt frivilligt. Studien kommer inte att publiceras offentligt.
 
 \section{Resultat}
 
 \subsection{Studiepopulationen}
-Totalt deltog 156 barn och deras f\"or\"aldrar/n\"arst\r{a}ende i studien. Av 156 barn var
-87 flickor och 55 pojkar, medan k\"onet ej hade angivits f\"or 13 deltagare. De
-yngsta barnen utgjorde den st\"orsta andelen av v\r{a}r studiepopulation. 92 barn
-(59\%) var $<$ 7 \r{a}r gamla. F\"or detaljerad k\"ons- och
-\r{a}ldersf\"ordelning se \% tabell 1
-och 2.
+Totalt deltog 156 barn och deras f\"or\"aldrar/n\"arst\r{a}ende i studien. Av
+156 barn var 87 flickor och 55 pojkar, medan k\"onet ej hade angivits f\"or 13
+deltagare. De yngsta barnen utgjorde den st\"orsta andelen av v\r{a}r
+studiepopulation. 92 barn (59\%) var $<$ 7 \r{a}r gamla. F\"or detaljerad
+k\"ons- och \r{a}ldersf\"ordelning se \% tabell 1 och 2.
 
 I 103 enk\"ater angavs mamma som medf\"oljande, i 39 enk\"ater angavs pappa. I 4
-enk\"ater angavs att b\r{a}de mamma och pappa var med, medan annan n\"arst\r{a}ende fyllde i
-enk\"aten i 5 fall. I 4 enk\"ater  saknades information om medf\"oljande.
+enk\"ater angavs att b\r{a}de mamma och pappa var med, medan annan
+n\"arst\r{a}ende fyllde i enk\"aten i 5 fall. I 4 enk\"ater  saknades
+information om medf\"oljande.
 
 133 av 156 barn (85\%) hade tagit prov (CRP och/eller Strep-A) tidigare. Redan i
 \r{a}ldersgruppen 0-3 \r{a}r hade X\% redan genomg\r{a}tt minst en provtagning
-tidigare, se
-tabell …
+tidigare, se tabell …
 
-Symtom fr\r{a}n luftv\"agarna (hosta, halsont, f\"orkylning, \"oronv\"ark och/eller feber i
-kombination med n\r{a}got av dessa symtom) utgjorde den vanligaste bes\"oksorsaken i
-v\r{a}r studiepopulation. \"ovriga bes\"oksorsaker var oklar/isolerad feber, GI-symtom
-(kr\"akningar, diarré, magont utan f\"orkylningssymtom) och UVI symtom. Tabell 3
-visar f\"ordelning av bes\"oksorsaker i populationen.
+Symtom fr\r{a}n luftv\"agarna (hosta, halsont, f\"orkylning, \"oronv\"ark
+och/eller feber i kombination med n\r{a}got av dessa symtom) utgjorde den
+vanligaste bes\"oksorsaken i v\r{a}r studiepopulation. \"ovriga bes\"oksorsaker
+var oklar/isolerad feber, GI-symtom (kr\"akningar, diarré, magont utan
+f\"orkylningssymtom) och UVI symtom. Tabell 3 visar f\"ordelning av
+bes\"oksorsaker i populationen.
 
-85\% av alla f\"or\"aldrar uppgav att dom hade f\"orv\"antat sig att det skulle tas
-\% prov
-i samband med l\"akarbes\"oket. 57\% hade \"onskem\r{a}l om detta, medan 36\% inte
-\% \"onskade
-att det skulle tas n\r{a}got prov (7\% svarade ej p\r{a} fr\r{a}gan).
+85\% av alla f\"or\"aldrar uppgav att dom hade f\"orv\"antat sig att det skulle
+tas \% prov i samband med l\"akarbes\"oket. 57\% hade \"onskem\r{a}l om detta,
+medan 36\% inte \% \"onskade att det skulle tas n\r{a}got prov (7\% svarade ej
+p\r{a} fr\r{a}gan).
 
-P\r{a} fr\r{a}gan r\"orande barnets allm\"antillst\r{a}nd svarade 34\% att barnets
-allm\"antillst\r{a}nd hade f\"ors\"amrats senaste dygnet. 50\% uppgav ett
-of\"or\"andrat
-allm\"antillst\r{a}nd medan 16\% svarade att barnets allm\"antillst\r{a}nd hade
-f\"orb\"attrats.
+P\r{a} fr\r{a}gan r\"orande barnets allm\"antillst\r{a}nd svarade 34\% att
+barnets allm\"antillst\r{a}nd hade f\"ors\"amrats senaste dygnet. 50\% uppgav
+ett of\"or\"andrat allm\"antillst\r{a}nd medan 16\% svarade att barnets
+allm\"antillst\r{a}nd hade f\"orb\"attrats.
 
 Korrelation mellan variabler V\r{a}r hypotes var att barnets sm\"artupplevelse minskar
 med stigande \r{a}lder. V\r{a}r studie visade att \r{a}lder \"ar en faktor som korrelerar v\"al
@@ -290,7 +339,8 @@ paper).}
 %% Put the bibliography here, most people will use BiBTeX in
 %% which case the environment below should be replaced with
 %% the \bibliography{} command.
-
+\newpage
+\onecolumn
 
 \begin{thebibliography}{1}
 \bibitem{Carverius2014} Carverius U, Ljungman G. Sm\"artbehandling vid procedurer
@@ -302,9 +352,9 @@ Pain Research and Clinical Management Series. Elseiver 2007.
 \bibitem{Fitzgerald2001}Fitzgerald M, Beggs S. The neurobiology of pain:
 developmental aspects. Neuroscientists         2001;7:246-57.
 \bibitem{Schechter2003} Schechter N, Berde S, Yaster M. Pain in Infants,
-Children, and Adolescents. Lippincott Williams & Wilkins 2003.
+Children, and Adolescents. Lippincott Williams \& Wilkins 2003.
 \bibitem{vBayer2004} von Bayer CL, et al. Children memory for pain: overview and implications for practice. J.Pain 2004.
-\bibitem{Tecken2014} Tecken p\r{a} allvarlig infektion hos barn. Ett kunskapsunderlag med f\"orslag till handl\"aggning i    prim\"arv\r{a}rd. www.folkhalsomyndigheten.se 2014.
+\bibitem{Tecken2014} Tecken p\r{a} allvarlig infektion hos barn. Ett kunskapsunderlag med f\"orslag till handl\"aggning i prim\"arv\r{a}rd. www.folkhalsomyndigheten.se 2014.
 \bibitem{Studie2014} Studie \"over faktorer som p\r{a}verkar l\"akarens beteende vid f\"orskrivning av antibiotika. Resultat fr\r{a}n tv\r{a} beteendevetenskapliga studier. www.folkh\"alsomyndigheten.se 2014.
 \bibitem{Fradet1990} Fradet C, McGarth PJ, Kay J, Adams S, Luke B. A prospective survey of reactions to blood        tests by children and adolescents. Pain. Elseiver 1990;40:53-60.
 \bibitem{vBayer2006} Von Baeyer C.    Children´s self reports on pain intensity: Scale selection, limitations and            interpretation. Pain Res Management 2006;11:157-162.
