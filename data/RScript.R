@@ -902,7 +902,7 @@ two_group <- function ( data1, data2, colA, colB ) {
 	p <- ggplot(d , aes( variable, value)) +geom_boxplot()
 	p <- p + xlab('') + ylab('')
 
-	fn = str_replace_all(make.names( paste("correlation", make.names(c(colA, colB)), collapse=" ")), "\\.+","_")
+	fn = str_replace_all(make.names( paste("wilcox.test", make.names(c(colA, colB)), collapse=" ")), "\\.+","_")
 	Plot( p,  fn )
 
 	for ( i in 1:1000 ) {
