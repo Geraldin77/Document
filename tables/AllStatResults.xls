@@ -1,0 +1,19 @@
+test	comparing	mean.p.value	mean.estimate	mean.statistics
+spearman n=1000	Fråga.6 vs. Fråga..9	0	0.706929222832828	only two group comparisons
+spearman n=1000	Fråga.6 vs. Fråga..10.VAS.CRP	7.66330507439147e-07	0.590449796472185	only two group comparisons
+spearman n=1000	Fråga.6 vs. Fråga..10.VAS.strep	0.00186133614143385	0.557643951612903	only two group comparisons
+spearman n=1000	Fråga.6 vs. Fråga..10	3.81133287197865e-09	0.582126861702128	only two group comparisons
+spearman n=1000	Fråga.7 vs. Fråga..9	0.748947845640943	0.0221725016918565	only two group comparisons
+spearman n=1000	Fråga.7 vs. Fråga..10.VAS.CRP	0.620248999154206	-0.0614000718333466	only two group comparisons
+spearman n=1000	Fråga.7 vs. Fråga..10.VAS.strep	0.324425274513623	0.190129838709677	only two group comparisons
+spearman n=1000	Fråga.7 vs. Fråga..10	0.788555786633746	0.00751187010078387	only two group comparisons
+spearman n=1000	Fråga..8 vs. Fråga..9	9.17683283112528e-09	0.469655228642325	only two group comparisons
+spearman n=1000	Fråga..8 vs. Fråga..10.VAS.CRP	2.34375942887331e-05	0.523317982281108	only two group comparisons
+spearman n=1000	Fråga..8 vs. Fråga..10.VAS.strep	0.000244002835294719	0.648358870967742	only two group comparisons
+spearman n=1000	Fråga..8 vs. Fråga..10	1.60641514201242e-08	0.573392679171333	only two group comparisons
+spearman n=1000	Fråga..9 vs. Fråga..10.VAS.CRP	2.17551357339723e-08	0.657428485912683	only two group comparisons
+spearman n=1000	Fråga..9 vs. Fråga..10.VAS.strep	5.1126870643292e-05	0.699691129032258	only two group comparisons
+spearman n=1000	Fråga..9 vs. Fråga..10	0	0.682722830347144	only two group comparisons
+wilcox.test n=1000	Fråga 9 Antal barn i familien = 1 vs. Fråga 9 Antal barn i familien > 1	0.232192610774144	Only correlations	779.946
+wilcox.test n=1000	Fråga 10 Antal barn i familien = 1 vs. Fråga 10 Antal barn i familien > 1	0.794698545203937	Only correlations	244.821
+wilcox.test n=1000	Fråga 10 flickor vs. Fraga 10 pojkar	0.801634004549575	Only correlations	446.135
