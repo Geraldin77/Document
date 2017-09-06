@@ -859,6 +859,65 @@ Plot(ggplot(STREP, aes( Åldern, Fråga..8 )) +geom_boxplot() +ylab('')+
 	'Question_8_STREP' )
 
 
+## sum up all statistics that have been run and should/could end up in the final document
+
+
+mean_cor_test <- function (colA, colB,  method="pearson" ) {
+	d <- vector('numeric', 1000)
+	r <- vector('numeric', 1000)
+	for ( i in 1:1000 ) {
+		t  <- cor.test( 
+			jitter(as.numeric(as.character(data[, colA]))), 
+			jitter(as.numeric(as.character(data[, colB]))),
+			method=method
+		)
+		d[i] <- t$p.value
+		r[i] <- t$estimate
+	}
+	list( test=paste(method, 'n=1000'), comparing = paste( colA, colB, sep=" vs. "), mean.p.value =mean (d), mean.estimate=mean(r))
+}
+
+two_group <- function ( data1, data2 ) {
+	d <- vector('numeric', 1000)
+        s <- vector('numeric', 1000)
+	for ( i in 1:1000 ) {
+		t <- wilcox.test( jitter(data1), jitter(data2) )
+		d[i] <- t$p.value
+		s[i] <- t$statistic
+	}
+	list(test='wilcox.test n=1000', comparing = paste( colA, colB, sep=" vs. "),  mean.p.value =mean (d), mean.statistics=mean(s))
+}
+
+
+stat_results = NULL
+
+mean_cor_test('Fråga.6', 'Fråga..9', 'spearman')
+mean_cor_test('Fråga.6', 'Fråga..10.VAS.CRP', 'spearman')
+mean_cor_test('Fråga.6', 'Fråga..10.VAS.strep', 'spearman')
+mean_cor_test('Fråga.6', 'Fråga..10', 'spearman')
+
+mean_cor_test('Fråga.7', 'Fråga..9', 'spearman')
+mean_cor_test('Fråga.7', 'Fråga..10.VAS.CRP', 'spearman')
+mean_cor_test('Fråga.7', 'Fråga..10.VAS.strep', 'spearman')
+mean_cor_test('Fråga.7', 'Fråga..10', 'spearman')
+
+mean_cor_test('Fråga..8', 'Fråga..9', 'spearman')
+mean_cor_test('Fråga..8', 'Fråga..10.VAS.CRP', 'spearman')
+mean_cor_test('Fråga..8', 'Fråga..10.VAS.strep', 'spearman')
+mean_cor_test('Fråga..8', 'Fråga..10', 'spearman')
+
+mean_cor_test( 'Fråga..9', 'Fråga..10.VAS.CRP', 'spearman')
+mean_cor_test( 'Fråga..9', 'Fråga..10.VAS.strep', 'spearman')
+mean_cor_test('Fråga..9', 'Fråga..10', 'spearman')
+
+
+
+
+
+
+
+
+
 
 
 
