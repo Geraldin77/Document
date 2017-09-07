@@ -869,9 +869,13 @@ mean_cor_test <- function (colA, colB,  method="pearson" ) {
 	data1 <- as.numeric(as.character(data[, colA]))
 	data2 <- as.numeric(as.character(data[, colB]))
 	d <- cbind( x=jitter(data1), y=jitter(data2))
-	d <- d[-unique(sort (c(which( is.na(d[,1])),which( is.na(d[,2])) ))),]
+	ids <- unique(sort (c(which( is.na(d[,1])),which( is.na(d[,2])) )))
+	if ( length(ids) > 0 ){
+		d <- d[-ids,]
+	}
 	p <- ggplot(data.frame(d), aes(x=x,y=y) ) + geom_point()
 	p <- p + xlab(colA) + ylab(colB)
+	p <- p + scale_y_continuous(breaks=c(0,2,4,6,8, 10)) + scale_x_continuous(breaks=c(0,2,4,6,8, 10))
 
 	fn = str_replace_all(make.names( paste("correlation", make.names(c(colA, colB)), collapse=" ")), "\\.+","_")
 	Plot( p,  fn )
@@ -900,7 +904,7 @@ two_group <- function ( data1, data2, colA, colB ) {
 	d <- data.frame(d)
 	d[,2]<- as.numeric(as.character(d[,2]))
 	p <- ggplot(d , aes( variable, value)) +geom_boxplot()
-	p <- p + xlab('') + ylab('')
+	p <- p + xlab('') + ylab('') + scale_y_continuous(breaks=c(0,2,4,6,8, 10))
 
 	fn = str_replace_all(make.names( paste("wilcox.test", make.names(c(colA, colB)), collapse=" ")), "\\.+","_")
 	Plot( p,  fn )
@@ -970,7 +974,92 @@ stat_results = rbind( stat_results,
 
 write.table( stat_results, file='../tables/AllStatResults.xls', row.names=F, quote=F, sep='\t')
 
+# while writing the document we came accross more questions:
+# did the sex of the parents that were in with the kid have an effect on there expectations?
 
+(s = table(data[,c(5,17)] )[-c(2:4),-3])
+#                    Fråga.2b.J.N
+#Mama.papa.närstående  j  n
+#                  m  61 34
+#                  p  20 18
+
+pdf( file="../figures/Chisq_parents_sex_vs_F2b.pdf", width=6, height=6)
+plot( s )
+dev.off()
+
+(t = chisq.test(s))
+
+#	Pearson's Chi-squared test with Yates' continuity correction
+
+#data:  s
+#X-squared = 1.0807, df = 1, p-value = 0.2985
+
+stat_results <- rbind( stat_results, c('chisq.test', 'Childs sex vs f2b', t$p.value, 'not used here', t$statistic, 'Chisq_parents_sex_vs_F2b.pdf' ) )
+
+
+s = table(data[,c(3,17)] )[-2,-3]
+#   Fråga.2b.J.N
+#kön  j  n
+#  f 53 31
+#  p 30 21
+
+pdf( file="../figures/Chisq_childs_sex_vs_F2b.pdf", width=6, height=6)
+plot( s )
+dev.off()
+
+t = chisq.test(s)
+
+
+stat_results <- rbind( stat_results, c('chisq.test', 'Childs sex vs f2b', t$p.value, 'not used here', t$statistic, 'Chisq_childs_sex_vs_F2b.pdf' ) )
+
+
+#	Pearson's Chi-squared test with Yates' continuity correction
+#data:  s
+#X-squared = 0.097402, df = 1, p-value = 0.755
+
+
+#s = table(data[,c(3,18)] )[-2,-4]
+##   Fråga.3...1.schlechter..0.unverändert...1.besser.
+##kön  0  1 -1
+##  f 51  8 27
+##  p 22 12 21
+#
+#t = chisq.test( s )
+#
+##	Pearson's Chi-squared test
+##data:  t(s)
+##X-squared = 6.5727, df = 2, p-value = 0.03739
+
+
+
+# did the allmänstillstand of the kid affect the parents whish to get the test made?
+s = table(data[,17:18])[-3,-4]
+#            Fråga.3...1.schlechter..0.unverändert...1.besser.
+#Fråga.2b.J.N  0  1 -1
+#           j 47 11 30
+#           n 26  9 21
+
+t = chisq.test( s )
+
+#	Pearson's Chi-squared test
+
+#data:  table(data[, 17:18])[-3, -4]
+#X-squared = 0.75553, df = 2, p-value = 0.6854
+
+pdf( file="../figures/Chisq_F2_vs_F3.pdf", width=6, height=6)
+plot( s )
+dev.off()
+
+stat_results <- rbind( stat_results, c('chisq.test', 'Fråga2b.JN vs Verlopp f3', t$p.value, 'not used here', t$statistic, 'Chisq_F2_vs_F3.pdf' ) )
+
+
+
+write.table( stat_results, file='../tables/AllStatResults.xls', row.names=F, quote=F, sep='\t')
+
+data$Åldern_numeric <- as.numeric(data$Åldern)
+
+stat_results = rbind( stat_results,mean_cor_test('Åldern_numeric', 'data.9',  method="spearman" ) )
+stat_results = rbind( stat_results,mean_cor_test('Åldern_numeric', 'data.10',  method="spearman" ) )
 
 
 

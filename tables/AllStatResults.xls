@@ -1,19 +1,18 @@
 test	comparing	mean.p.value	mean.estimate	mean.statistics	figure
-spearman n=1000	Fråga.6 vs. Fråga..9	0	0.70708353581902	only two group comparisons	correlation_Fråga_6_correlation_Fråga_9
-spearman n=1000	Fråga.6 vs. Fråga..10.VAS.CRP	7.72924194651515e-07	0.589407734056988	only two group comparisons	correlation_Fråga_6_correlation_Fråga_10_VAS_CRP
-spearman n=1000	Fråga.6 vs. Fråga..10.VAS.strep	0.00195590694146319	0.556439516129032	only two group comparisons	correlation_Fråga_6_correlation_Fråga_10_VAS_strep
-spearman n=1000	Fråga.6 vs. Fråga..10	4.62232480081662e-09	0.582833706606943	only two group comparisons	correlation_Fråga_6_correlation_Fråga_10
-spearman n=1000	Fråga.7 vs. Fråga..9	0.747376509081773	0.0212960394444265	only two group comparisons	correlation_Fråga_7_correlation_Fråga_9
-spearman n=1000	Fråga.7 vs. Fråga..10.VAS.CRP	0.618400397654843	-0.0611356852103121	only two group comparisons	correlation_Fråga_7_correlation_Fråga_10_VAS_CRP
-spearman n=1000	Fråga.7 vs. Fråga..10.VAS.strep	0.328474353827359	0.188689516129032	only two group comparisons	correlation_Fråga_7_correlation_Fråga_10_VAS_strep
-spearman n=1000	Fråga.7 vs. Fråga..10	0.779517964179639	0.00830155375139978	only two group comparisons	correlation_Fråga_7_correlation_Fråga_10
-spearman n=1000	Fråga..8 vs. Fråga..9	1.19266303966822e-08	0.468411092133673	only two group comparisons	correlation_Fråga_8_correlation_Fråga_9
-spearman n=1000	Fråga..8 vs. Fråga..10.VAS.CRP	2.23700281177947e-05	0.524045733897358	only two group comparisons	correlation_Fråga_8_correlation_Fråga_10_VAS_CRP
-spearman n=1000	Fråga..8 vs. Fråga..10.VAS.strep	0.000245809975766777	0.6461875	only two group comparisons	correlation_Fråga_8_correlation_Fråga_10_VAS_strep
-spearman n=1000	Fråga..8 vs. Fråga..10	1.00416513054347e-08	0.57477695968645	only two group comparisons	correlation_Fråga_8_correlation_Fråga_10
-spearman n=1000	Fråga..9 vs. Fråga..10.VAS.CRP	2.07934180987768e-08	0.657623752893288	only two group comparisons	correlation_Fråga_9_correlation_Fråga_10_VAS_CRP
-spearman n=1000	Fråga..9 vs. Fråga..10.VAS.strep	5.41718287087899e-05	0.698935887096774	only two group comparisons	correlation_Fråga_9_correlation_Fråga_10_VAS_strep
-spearman n=1000	Fråga..9 vs. Fråga..10	0	0.683942735162374	only two group comparisons	correlation_Fråga_9_correlation_Fråga_10
-wilcox.test n=1000	Fråga 9 Antal barn i familien = 1 vs. Fråga 9 Antal barn i familien > 1	NA	Only correlations	780.656	wilcox_test_Fråga_9_Antal_barn_i_familien_1_wilcox_test_Fråga_9_Antal_barn_i_familien_1
-wilcox.test n=1000	Fråga 10 Antal barn i familien = 1 vs. Fråga 10 Antal barn i familien > 1	NA	Only correlations	244.499	wilcox_test_Fråga_10_Antal_barn_i_familien_1_wilcox_test_Fråga_10_Antal_barn_i_familien_1
-wilcox.test n=1000	Fråga 10 flickor vs. Fraga 10 pojkar	NA	Only correlations	445.939	wilcox_test_Fråga_10_flickor_wilcox_test_Fraga_10_pojkar
+spearman n=1000	Fråga.7 vs. Fråga..9	0.741856958179627	0.022428751893268	only two group comparisons	correlation_Fråga_7_correlation_Fråga_9
+spearman n=1000	Fråga.7 vs. Fråga..10.VAS.CRP	0.619887306205608	-0.0608040146859287	only two group comparisons	correlation_Fråga_7_correlation_Fråga_10_VAS_CRP
+spearman n=1000	Fråga.7 vs. Fråga..10.VAS.strep	0.331626466015319	0.187140322580645	only two group comparisons	correlation_Fråga_7_correlation_Fråga_10_VAS_strep
+spearman n=1000	Fråga.7 vs. Fråga..10	0.783407130845597	0.00927144456886898	only two group comparisons	correlation_Fråga_7_correlation_Fråga_10
+spearman n=1000	Fråga..8 vs. Fråga..9	9.92934836398158e-09	0.468640562663143	only two group comparisons	correlation_Fråga_8_correlation_Fråga_9
+spearman n=1000	Fråga..8 vs. Fråga..10.VAS.CRP	2.18322035147377e-05	0.524047928805172	only two group comparisons	correlation_Fråga_8_correlation_Fråga_10_VAS_CRP
+spearman n=1000	Fråga..8 vs. Fråga..10.VAS.strep	0.000231543257170946	0.649014112903226	only two group comparisons	correlation_Fråga_8_correlation_Fråga_10_VAS_strep
+spearman n=1000	Fråga..8 vs. Fråga..10	1.4298840798213e-08	0.574109630459127	only two group comparisons	correlation_Fråga_8_correlation_Fråga_10
+spearman n=1000	Fråga..9 vs. Fråga..10.VAS.CRP	2.42029279455788e-08	0.657225317263948	only two group comparisons	correlation_Fråga_9_correlation_Fråga_10_VAS_CRP
+spearman n=1000	Fråga..9 vs. Fråga..10.VAS.strep	4.84453765266366e-05	0.699895564516129	only two group comparisons	correlation_Fråga_9_correlation_Fråga_10_VAS_strep
+spearman n=1000	Fråga..9 vs. Fråga..10	0	0.682332278835386	only two group comparisons	correlation_Fråga_9_correlation_Fråga_10
+wilcox.test n=1000	Fråga 9 Antal barn i familien = 1 vs. Fråga 9 Antal barn i familien > 1	NA	Only correlations	779.959	wilcox_test_Fråga_9_Antal_barn_i_familien_1_wilcox_test_Fråga_9_Antal_barn_i_familien_1
+wilcox.test n=1000	Fråga 10 Antal barn i familien = 1 vs. Fråga 10 Antal barn i familien > 1	NA	Only correlations	244.912	wilcox_test_Fråga_10_Antal_barn_i_familien_1_wilcox_test_Fråga_10_Antal_barn_i_familien_1
+wilcox.test n=1000	Fråga 10 flickor vs. Fraga 10 pojkar	NA	Only correlations	446.886	wilcox_test_Fråga_10_flickor_wilcox_test_Fraga_10_pojkar
+chisq.test	Childs sex vs f2b	0.298540132942474	not used here	1.08070394112061	Chisq_parents_sex_vs_F2b.pdf
+chisq.test	Childs sex vs f2b	0.75497017854804	not used here	0.0974017677043011	Chisq_childs_sex_vs_F2b.pdf
+chisq.test	Fråga2b.JN vs Verlopp f3	0.685391477783124	not used here	0.75553020710152	Chisq_F2_vs_F3.pdf
