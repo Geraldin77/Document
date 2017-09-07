@@ -865,54 +865,110 @@ Plot(ggplot(STREP, aes( Åldern, Fråga..8 )) +geom_boxplot() +ylab('')+
 mean_cor_test <- function (colA, colB,  method="pearson" ) {
 	d <- vector('numeric', 1000)
 	r <- vector('numeric', 1000)
+	#plot one
+	data1 <- as.numeric(as.character(data[, colA]))
+	data2 <- as.numeric(as.character(data[, colB]))
+	d <- cbind( x=jitter(data1), y=jitter(data2))
+	d <- d[-unique(sort (c(which( is.na(d[,1])),which( is.na(d[,2])) ))),]
+	p <- ggplot(data.frame(d), aes(x=x,y=y) ) + geom_point()
+	p <- p + xlab(colA) + ylab(colB)
+
+	fn = str_replace_all(make.names( paste("correlation", make.names(c(colA, colB)), collapse=" ")), "\\.+","_")
+	Plot( p,  fn )
+
 	for ( i in 1:1000 ) {
 		t  <- cor.test( 
-			jitter(as.numeric(as.character(data[, colA]))), 
-			jitter(as.numeric(as.character(data[, colB]))),
+			jitter(data1), 
+			jitter(data2),
 			method=method
 		)
 		d[i] <- t$p.value
 		r[i] <- t$estimate
 	}
-	list( test=paste(method, 'n=1000'), comparing = paste( colA, colB, sep=" vs. "), mean.p.value =mean (d), mean.estimate=mean(r))
+	list( test=paste(method, 'n=1000'), comparing = paste( colA, colB, sep=" vs. "), mean.p.value =mean (d), mean.estimate=mean(r), mean.statistics="only two group comparisons", figure=fn)
 }
 
-two_group <- function ( data1, data2 ) {
+two_group <- function ( data1, data2, colA, colB ) {
 	d <- vector('numeric', 1000)
         s <- vector('numeric', 1000)
+	## plot one
+	d <- t(data.frame(lapply( data1, function(x) { c( colA, x) } ) ))
+	d <- rbind(d, t(data.frame(lapply( data2, function(x) { c( colB, x) } ) )) )
+	d[,2] <- as.numeric(as.character(d[,2]))
+	rownames(d) <- 1:nrow(d)
+	colnames(d) <- c( 'variable', 'value')
+	d <- data.frame(d)
+	d[,2]<- as.numeric(as.character(d[,2]))
+	p <- ggplot(d , aes( variable, value)) +geom_boxplot()
+	p <- p + xlab('') + ylab('')
+
+	fn = str_replace_all(make.names( paste("wilcox.test", make.names(c(colA, colB)), collapse=" ")), "\\.+","_")
+	Plot( p,  fn )
+
 	for ( i in 1:1000 ) {
 		t <- wilcox.test( jitter(data1), jitter(data2) )
 		d[i] <- t$p.value
 		s[i] <- t$statistic
 	}
-	list(test='wilcox.test n=1000', comparing = paste( colA, colB, sep=" vs. "),  mean.p.value =mean (d), mean.statistics=mean(s))
+	list(test='wilcox.test n=1000', comparing = paste( colA, colB, sep=" vs. "),  mean.p.value =mean (d),mean.estimate="Only correlations", mean.statistics=mean(s), figure=fn)
 }
 
+library(ggplot2)
+library(reshape2)
+library(stringr)
 
 stat_results = NULL
 
-mean_cor_test('Fråga.6', 'Fråga..9', 'spearman')
-mean_cor_test('Fråga.6', 'Fråga..10.VAS.CRP', 'spearman')
-mean_cor_test('Fråga.6', 'Fråga..10.VAS.strep', 'spearman')
-mean_cor_test('Fråga.6', 'Fråga..10', 'spearman')
+stat_results = rbind( stat_results, mean_cor_test('Fråga.6', 'Fråga..9', 'spearman') )
+stat_results = rbind( stat_results,mean_cor_test('Fråga.6', 'Fråga..10.VAS.CRP', 'spearman') )
+stat_results = rbind( stat_results,mean_cor_test('Fråga.6', 'Fråga..10.VAS.strep', 'spearman') )
+stat_results = rbind( stat_results,mean_cor_test('Fråga.6', 'Fråga..10', 'spearman') )
 
-mean_cor_test('Fråga.7', 'Fråga..9', 'spearman')
-mean_cor_test('Fråga.7', 'Fråga..10.VAS.CRP', 'spearman')
-mean_cor_test('Fråga.7', 'Fråga..10.VAS.strep', 'spearman')
-mean_cor_test('Fråga.7', 'Fråga..10', 'spearman')
+stat_results = rbind( stat_results,mean_cor_test('Fråga.7', 'Fråga..9', 'spearman') )
+stat_results = rbind( stat_results,mean_cor_test('Fråga.7', 'Fråga..10.VAS.CRP', 'spearman') )
+stat_results = rbind( stat_results,mean_cor_test('Fråga.7', 'Fråga..10.VAS.strep', 'spearman') )
+stat_results = rbind( stat_results,mean_cor_test('Fråga.7', 'Fråga..10', 'spearman') )
 
-mean_cor_test('Fråga..8', 'Fråga..9', 'spearman')
-mean_cor_test('Fråga..8', 'Fråga..10.VAS.CRP', 'spearman')
-mean_cor_test('Fråga..8', 'Fråga..10.VAS.strep', 'spearman')
-mean_cor_test('Fråga..8', 'Fråga..10', 'spearman')
+stat_results = rbind( stat_results,mean_cor_test('Fråga..8', 'Fråga..9', 'spearman') )
+stat_results = rbind( stat_results,mean_cor_test('Fråga..8', 'Fråga..10.VAS.CRP', 'spearman') )
+stat_results = rbind( stat_results,mean_cor_test('Fråga..8', 'Fråga..10.VAS.strep', 'spearman') )
+stat_results = rbind( stat_results,mean_cor_test('Fråga..8', 'Fråga..10', 'spearman') )
 
-mean_cor_test( 'Fråga..9', 'Fråga..10.VAS.CRP', 'spearman')
-mean_cor_test( 'Fråga..9', 'Fråga..10.VAS.strep', 'spearman')
-mean_cor_test('Fråga..9', 'Fråga..10', 'spearman')
-
-
+stat_results = rbind( stat_results,mean_cor_test( 'Fråga..9', 'Fråga..10.VAS.CRP', 'spearman') )
+stat_results = rbind( stat_results,mean_cor_test( 'Fråga..9', 'Fråga..10.VAS.strep', 'spearman') )
+stat_results = rbind( stat_results,mean_cor_test('Fråga..9', 'Fråga..10', 'spearman') )
 
 
+stat_results = rbind( stat_results,
+	two_group( as.numeric(as.character(data$Fråga..9))[only_1], 
+		as.numeric(as.character(data$Fråga..9))[more_than_1],
+		'Fråga 9 Antal barn i familien = 1',
+		'Fråga 9 Antal barn i familien > 1'
+	)
+)
+
+stat_results = rbind( stat_results,
+	two_group( as.numeric(as.character(data$Fråga..10))[only_1], 
+		as.numeric(as.character(data$Fråga..10))[more_than_1],
+		'Fråga 10 Antal barn i familien = 1',
+		'Fråga 10 Antal barn i familien > 1'
+	)
+) 
+
+id_f =which(data$kön == 'f' & data$Åldern != '10-13')
+id_p =which(data$kön == 'p' & data$Åldern != '10-13')
+
+stat_results = rbind( stat_results, 
+	two_group( 
+		as.numeric(as.character(data$Fråga..10[id_f])), 
+		as.numeric(as.character(data$Fråga..10[id_p])),
+		'Fråga 10 flickor',
+		'Fraga 10 pojkar'
+	)
+)
+
+
+write.table( stat_results, file='../tables/AllStatResults.xls', row.names=F, quote=F, sep='\t')
 
 
 
