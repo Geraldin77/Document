@@ -869,18 +869,18 @@ mean_cor_test <- function (colA, colB,  method="pearson" ) {
 	data1 <- as.numeric(as.character(data[, colA]))
 	data2 <- as.numeric(as.character(data[, colB]))
 
-	d <- cbind( x=jitter(data1), y=jitter(data2))
-	ids <- unique(sort (c(which( is.na(d[,1])),which( is.na(d[,2])) )))
+	da <- cbind( x=jitter(data1), y=jitter(data2))
+	ids <- unique(sort (c(which( is.na(da[,1])),which( is.na(da[,2])) )))
 	if ( length(ids) > 0 ){
-		d <- d[-ids,]
+		da <- da[-ids,]
 	}
-	p <- ggplot(data.frame(d), aes(x=x,y=y) ) + geom_point()
+	p <- ggplot(data.frame(da), aes(x=x,y=y) ) + geom_point()
 	p <- p + xlab(colA) + ylab(colB)
 	p <- p + scale_y_continuous(breaks=c(0,2,4,6,8, 10)) + scale_x_continuous(breaks=c(0,2,4,6,8, 10))
 
 	fn = str_replace_all(make.names( paste("correlation", make.names(c(colA, colB)), collapse=" ")), "\\.+","_")
 	Plot( p,  fn )
-	browser()
+
 
 	for ( i in 1:1000 ) {
 		t  <- cor.test( 
