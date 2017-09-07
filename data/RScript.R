@@ -868,6 +868,7 @@ mean_cor_test <- function (colA, colB,  method="pearson" ) {
 	#plot one
 	data1 <- as.numeric(as.character(data[, colA]))
 	data2 <- as.numeric(as.character(data[, colB]))
+
 	d <- cbind( x=jitter(data1), y=jitter(data2))
 	ids <- unique(sort (c(which( is.na(d[,1])),which( is.na(d[,2])) )))
 	if ( length(ids) > 0 ){
@@ -879,6 +880,7 @@ mean_cor_test <- function (colA, colB,  method="pearson" ) {
 
 	fn = str_replace_all(make.names( paste("correlation", make.names(c(colA, colB)), collapse=" ")), "\\.+","_")
 	Plot( p,  fn )
+	browser()
 
 	for ( i in 1:1000 ) {
 		t  <- cor.test( 
@@ -922,6 +924,8 @@ library(reshape2)
 library(stringr)
 
 stat_results = NULL
+
+stat_results = rbind( stat_results, mean_cor_test('Fråga.6', 'Fråga..9', 'spearman') )
 
 stat_results = rbind( stat_results, mean_cor_test('Fråga.6', 'Fråga..9', 'spearman') )
 stat_results = rbind( stat_results,mean_cor_test('Fråga.6', 'Fråga..10.VAS.CRP', 'spearman') )
@@ -1058,9 +1062,19 @@ write.table( stat_results, file='../tables/AllStatResults.xls', row.names=F, quo
 
 data$Åldern_numeric <- as.numeric(data$Åldern)
 
-stat_results = rbind( stat_results,mean_cor_test('Åldern_numeric', 'data.9',  method="spearman" ) )
-stat_results = rbind( stat_results,mean_cor_test('Åldern_numeric', 'data.10',  method="spearman" ) )
+stat_results = rbind( stat_results, mean_cor_test('Åldern_numeric', 'data.9',  method="spearman" ) )
+stat_results = rbind( stat_results, mean_cor_test('Åldern_numeric', 'data.10',  method="spearman" ) )
 
+
+
+stat_results = rbind( stat_results, 
+	two_group( 
+		as.numeric(as.character(data$data.10[data$tidigare_provatgning_binary == F])), 
+		as.numeric(as.character(data$data.10[data$tidigare_provatgning_binary])),
+		'först prov',
+		'minst andra prov'
+	)
+)
 
 
 
