@@ -898,14 +898,16 @@ two_group <- function ( data1, data2, colA, colB ) {
 	d <- vector('numeric', 1000)
         s <- vector('numeric', 1000)
 	## plot one
-	d <- t(data.frame(lapply( data1, function(x) { c( colA, x) } ) ))
-	d <- rbind(d, t(data.frame(lapply( data2, function(x) { c( colB, x) } ) )) )
-	d[,2] <- as.numeric(as.character(d[,2]))
-	rownames(d) <- 1:nrow(d)
-	colnames(d) <- c( 'variable', 'value')
-	d <- data.frame(d)
-	d[,2]<- as.numeric(as.character(d[,2]))
-	p <- ggplot(d , aes( variable, value)) +geom_boxplot()
+	data1 <- data1[is.na(data1) ==F]
+	data2 <- data1[is.na(data2) ==F]
+	da <- t(data.frame(lapply( data1, function(x) { c( colA, x) } ) ))
+	da <- rbind(d, t(data.frame(lapply( data2, function(x) { c( colB, x) } ) )) )
+	da[,2] <- as.numeric(as.character(da[,2]))
+	rownames(da) <- 1:nrow(da)
+	colnames(da) <- c( 'variable', 'value')
+	da <- data.frame(da)
+	da[,2]<- as.numeric(as.character(da[,2]))
+	p <- ggplot(da , aes( variable, value)) +geom_boxplot()
 	p <- p + xlab('') + ylab('') + scale_y_continuous(breaks=c(0,2,4,6,8, 10))
 
 	fn = str_replace_all(make.names( paste("wilcox.test", make.names(c(colA, colB)), collapse=" ")), "\\.+","_")
@@ -956,8 +958,8 @@ stat_results = rbind( stat_results,
 )
 
 stat_results = rbind( stat_results,
-	two_group( as.numeric(as.character(data$Fråga..10))[only_1], 
-		as.numeric(as.character(data$Fråga..10))[more_than_1],
+	two_group( as.numeric(as.character(data$data.10))[only_1], 
+		as.numeric(as.character(data$data.10))[more_than_1],
 		'Fråga 10 Antal barn i familien = 1',
 		'Fråga 10 Antal barn i familien > 1'
 	)
@@ -968,8 +970,8 @@ id_p =which(data$kön == 'p' & data$Åldern != '10-13')
 
 stat_results = rbind( stat_results, 
 	two_group( 
-		as.numeric(as.character(data$Fråga..10[id_f])), 
-		as.numeric(as.character(data$Fråga..10[id_p])),
+		as.numeric(as.character(data$data.10[id_f])), 
+		as.numeric(as.character(data$data.10[id_p])),
 		'Fråga 10 flickor',
 		'Fraga 10 pojkar'
 	)
@@ -1075,6 +1077,18 @@ stat_results = rbind( stat_results,
 		'minst andra prov'
 	)
 )
+
+
+
+
+
+
+write.table( stat_results, file='../tables/AllStatResults.xls', row.names=F, quote=F, sep='\t')
+
+
+
+
+
 
 
 
